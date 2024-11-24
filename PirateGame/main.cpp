@@ -34,7 +34,7 @@ public:
 
     // Function to check if a point (like the mouse position) is within the island's bounds
     // `sf::FloatRect::contains` checks whether the rectangle contains a given point
-    [[nodiscard]] bool isClicked(const sf::Vector2f& point) const
+     [[nodiscard]] bool isClicked(const sf::Vector2f& point) const
     {
         return bounds.contains(point);
     }
@@ -115,8 +115,7 @@ public:
 int main()
 {
     // Creates a game window (800x600 pixels) with the title "SFML Islands with OOP"
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML Islands with OOP");
-    window.setFramerateLimit(60); // Caps the frame rate at 60 frames per second
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Shipwrecked");
 
     // Loads textures for different states (background, victory, defeat screens)
     sf::Texture normalTexture, victoryTexture, defeatTexture;
@@ -139,22 +138,23 @@ int main()
     std::vector<std::unique_ptr<Island>> islands;
 
     // Adds islands to the vector with specific types and positions
-    // `emplace_back` constructs objects directly in the vector, avoiding unnecessary copies
-    islands.emplace_back(std::make_unique<VictoryIsland>(sf::FloatRect(30, 25, 200, 150))); // Top-left
-    islands.emplace_back(std::make_unique<DefeatIsland>(sf::FloatRect(295, 25, 213, 150))); // Top-center
-    islands.emplace_back(std::make_unique<NormalIsland>(sf::FloatRect(570, 25, 205, 150))); // Top-right
-    islands.emplace_back(std::make_unique<NormalIsland>(sf::FloatRect(30, 225, 200, 154))); // Mid-Left
-    islands.emplace_back(std::make_unique<VictoryIsland>(sf::FloatRect(295, 225, 213, 154))); // Mid-center
-    islands.emplace_back(std::make_unique<DefeatIsland>(sf::FloatRect(570, 225, 205, 154))); // Mid-Right
-    islands.emplace_back(std::make_unique<DefeatIsland>(sf::FloatRect(30, 430, 200, 150))); // Bottom-Left
-    islands.emplace_back(std::make_unique<NormalIsland>(sf::FloatRect(295, 430, 213, 150))); // Bottom-Center
-    islands.emplace_back(std::make_unique<VictoryIsland>(sf::FloatRect(570, 430, 205, 150))); // Bottom-Right
+    //Usage of make_unique to create objects of each vector type Victory, Normal, Defeat.
+    islands.push_back(std::make_unique<VictoryIsland>(sf::FloatRect(30, 25, 200, 150))); // Top-left
+    islands.push_back(std::make_unique<DefeatIsland>(sf::FloatRect(295, 25, 213, 150))); // Top-center
+    islands.push_back(std::make_unique<NormalIsland>(sf::FloatRect(570, 25, 205, 150))); // Top-right
+    islands.push_back(std::make_unique<NormalIsland>(sf::FloatRect(30, 225, 200, 154))); // Mid-Left
+    islands.push_back(std::make_unique<VictoryIsland>(sf::FloatRect(295, 225, 213, 154))); // Mid-center
+    islands.push_back(std::make_unique<DefeatIsland>(sf::FloatRect(570, 225, 205, 154))); // Mid-Right
+    islands.push_back(std::make_unique<DefeatIsland>(sf::FloatRect(30, 430, 200, 150))); // Bottom-Left
+    islands.push_back(std::make_unique<NormalIsland>(sf::FloatRect(295, 430, 213, 150))); // Bottom-Center
+    islands.push_back(std::make_unique<VictoryIsland>(sf::FloatRect(570, 430, 205, 150))); // Bottom-Right
 
     // Tracks the current game state (Normal, Victory, Defeat)
-    enum class GameState
+    enum GameState
     { Normal, Victory, Defeat };
 
-    GameState currentState = GameState::Normal; // Initially in the "Normal" state
+    // Initially in the "Normal" state
+    GameState currentState = Normal;
 
     // Tracks if the mouse button is being held (for click debouncing)
     bool mousePressed = false;
@@ -162,11 +162,14 @@ int main()
     // Main game loop: runs until the user closes the window
     while (window.isOpen())
     {
-        sf::Event event{}; // Event object to capture user input
+        // Event object to capture user input
+        sf::Event event{};
 
+        // Processes all events
         while (window.pollEvent(event))
-        { // Processes all events
-            if (event.type == sf::Event::Closed) // Checks if the "close" event occurred
+        {
+            // Checks if the "close" event occurred ( window closed )
+            if (event.type == sf::Event::Closed)
                 window.close();
         }
 
@@ -179,8 +182,9 @@ int main()
             {
                 // Marks the mouse as pressed
                 mousePressed = true;
+
                 // Only processes clicks in the "Normal" state
-                if (currentState == GameState::Normal)
+                if (currentState == Normal)
                 {
                     // Gets the mouse position in pixels
                     sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
@@ -199,16 +203,16 @@ int main()
                             if (dynamic_cast<VictoryIsland*>(island.get()))
                             {
                                 // `dynamic_cast` safely checks and converts the pointer to a specific type
-                                currentState = GameState::Victory;
+                                currentState = Victory;
                             }
 
                             else if (dynamic_cast<DefeatIsland*>(island.get()))
                             {
-                                currentState = GameState::Defeat;
+                                currentState = Defeat;
                             }
 
                             // Executes the island-specific click behavior
-                            island->handleClick(window, currentState == GameState::Victory ? victorySprite : defeatSprite);
+                            island->handleClick(window, currentState == Victory ? victorySprite : defeatSprite);
                             // Exits the loop after handling one island
                             break;
                         }
@@ -229,7 +233,7 @@ int main()
         switch (currentState)
         {
             // In "Normal" state, draws the background and island bounds
-            case GameState::Normal:
+            case Normal:
                 window.draw(normalSprite);
                 for (const auto& island : islands)
                 {
@@ -239,12 +243,12 @@ int main()
                 break;
 
             // In "Victory" state, displays the victory screen
-            case GameState::Victory:
+            case Victory:
                 window.draw(victorySprite);
                 break;
 
             // In "Defeat" state, displays the defeat screen
-            case GameState::Defeat:
+            case Defeat:
                 window.draw(defeatSprite);
                 break;
         }
