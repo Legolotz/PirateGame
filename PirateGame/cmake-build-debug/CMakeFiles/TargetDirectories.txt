@@ -1,0 +1,3 @@
+C:/Users/schwa/CLionProjects/PirateGame/cmake-build-debug/CMakeFiles/PirateGame.dir
+C:/Users/schwa/CLionProjects/PirateGame/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/schwa/CLionProjects/PirateGame/cmake-build-debug/CMakeFiles/rebuild_cache.dir
