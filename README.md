@@ -1,3 +1,4 @@
+[![Scorecard supply-chain security](https://github.com/Legolotz/PirateGame/actions/workflows/scorecard.yml/badge.svg)](https://github.com/Legolotz/PirateGame/actions/workflows/scorecard.yml)
 // Coder/Developer: Delfino Jimenez Vasquez, Logan Shroyer, Laurenz Becker
 // Class          : COP 3003, Fall 2024
 // Date           : 11/17/2024
