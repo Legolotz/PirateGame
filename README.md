@@ -7,6 +7,8 @@
 // Class          : COP 3003, Fall 2024
 // Date           : 11/17/2024
 /* Description    :
+This project was coded in SFML and c++ using c-lion!
+
    A pirate game where you click on islands and if you guess the right one you win, but if you guess the wrong one you loose. It will open up 
    a picture with sfml and you have to guess which island is the correct one. If you get it correct you will get to the winning screen, while when you
    get it wrong you'll end up at the loosing screen!
