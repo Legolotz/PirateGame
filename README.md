@@ -2,7 +2,7 @@
 
 [![Scorecard supply-chain security](https://github.com/Legolotz/PirateGame/actions/workflows/scorecard.yml/badge.svg)](https://github.com/Legolotz/PirateGame/actions/workflows/scorecard.yml)
 
-[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/10298/badge)](https://www.bestpractices.dev/projects/10298)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/10298/badge)](https://www.bestpractices.dev/projects/10298) 
 
 
 // Coder/Developer: Delfino Jimenez Vasquez, Logan Shroyer, Laurenz Becker
